@@ -1,5 +1,5 @@
 # SPA in JavaScript
-##Script Launch
+## Script Launch
 ```bash
 npm run build
 ```
