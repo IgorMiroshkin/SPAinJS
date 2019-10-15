@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SPA in JS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
+    <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+    <script></script>
+</head>
+<body>
+    <div class="container">
+        <div id="header"></div>
+
+        <div class="btn-group btn-group-lg">
+            <a href="#friends" class="btn btn-default" data-role="nav-friends">Друзья</a>
+            <a href="#news" class="btn btn-default" data-role="nav-news">Новости</a>
+        </div>
+        <hr>
+        <div id="result"></div>
+    </div>
+
+    <script id="headerTemplate" type="text/template">
+        <h1>Данные из VK-аккуанта {{ first_name }} {{ last_name }}</h1>
+    </script>
+
+    <script id="friendsTemplate" type="text/template">
+        <select data-role="sort">
+            <option value="name">По имени</option>
+            <option value="bday">По дню рождению</option>
+        </select>
+        <div class="flex-container">
+            {{#each list}}
+            <div class="friend text-center">
+                <a href="#friends/{{id}}"><img src="{{ photo_100 }}" class="img-circle"></a>
+                <div>{{ first_name }}<br>{{ last_name }}</div>
+                <div>{{ formatBDay bdate }}</div>
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="friendTemplate" type="text/template">
+        <div>
+            <img src="{{ photo_100 }}" class="img-circle">
+            <div>{{ first_name }} {{ last_name }}</div>
+            <div>{{ country.title }} {{ city.title }}</div>
+            {{#if bdate}}
+            <div>День рождения: {{ formatBDay bdate }}</div>
+            {{/if}}
+        </div>
+    </script>
+
+    <script id="newsTemplate" type="text/template">
+        <div class="news">
+            {{#each list}}
+            {{#if text}}
+            <div class="post">
+                <b>{{ formatDate date }}</b>
+                <div class="post-text">{{ text }}</div>
+            </div>
+            <hr>
+            {{/if}}
+            {{/each}}
+        </div>
+    </script>
+</body>
+</html>
